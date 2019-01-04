@@ -1,16 +1,8 @@
-/*NOICESOURCE
-	Source string
-	Regex string
-	InnerDelimiter string
-	OuterDelimiter string
-	CapturedLinks
-	Frequentie int
-Noice source : stackoverflow, dev.com, site du 0, /g/, 01 net, dev.to, 
+/*
+NOICESOURCE
+stackoverflow, dev.com, site du 0, /g/, 01 net, dev.to, 
 
 NOICESEARCH
-	link string
-	keywords string[]
-	frequentie
 Google, stackoverflow
 
 */
@@ -18,7 +10,7 @@ Google, stackoverflow
 
 package main
 import (
-"fmt"
+//"fmt"
 "io/ioutil"
 "net/http"
 )
@@ -38,9 +30,23 @@ type NoiceSearch struct{
 	Frequence int
 }
 
+func initDevSources()(ns []NoiceSource){
+	n0  := NoiceSource{"https://www.developpez.com","/actu/","","", []string{},10}
+	ns = append(ns,n0)
+
+	n1  := NoiceSource{"https://www.stackoverflow.com","/questions/","","", []string{},10}
+	ns = append(ns,n0)
+	return
+}
+
+func initNoiceSources()(ns []NoiceSource){
+	ns = append(ns,initDevSources())
+	return 
+}
+
 
 func main(){
-	fmt.Println(goToUrl("http://theo.sorr.io"))
+	ns = initDevSources()
 }
 
 func goToUrl(url string)(string){
